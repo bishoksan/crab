@@ -16,7 +16,9 @@
 #include <crab/domains/array_smashing.hpp>
 #include <crab/domains/nullity.hpp>
 #include <crab/domains/flat_boolean_domain.hpp>                      
-#include <crab/domains/combined_domains.hpp>                      
+#include <crab/domains/combined_domains.hpp> 
+#include <crab/domains/wrapped_numerical_domain.hpp>
+#include <crab/domains/wrapped_numerical_domain_sk.hpp>
 
 namespace crab {
 
@@ -63,7 +65,9 @@ namespace crab {
     typedef array_smashing<z_num_null_domain_t> z_as_num_null_t;
     typedef array_smashing<z_bool_num_domain_t> z_as_bool_num_t;
     // machine arithmetic domains
-    typedef wrapped_interval_domain<ikos::z_number, varname_t> z_wrapped_interval_domain_t;
+      typedef wrapped_interval_with_history_domain<ikos::z_number, varname_t> z_wrapped_interval_domain_t;
+      typedef wrapped_numerical_domain_sk<z_wrapped_interval_domain_t, z_sdbm_domain_t> z_wrapped_numerical_domain_t;
+      typedef wrapped_numerical_domain<z_wrapped_interval_domain_t, z_sdbm_domain_t> z_wrapped_int_dbm_t;
     /// Numerical domains over rationals
     typedef interval_domain<ikos::q_number,varname_t > q_interval_domain_t;
     typedef apron_domain<ikos::q_number,varname_t,apron_domain_id_t::APRON_PK>

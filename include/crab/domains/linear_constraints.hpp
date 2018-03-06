@@ -183,6 +183,19 @@ namespace ikos {
       return this->_cst;
     }
     
+            bool is_variable() const {
+            if (this->is_constant()) {
+                return false;
+            }
+            if ((this->constant() == 0) && (this->size() == 1)) {
+                typename linear_expression_t::iterator it = this->begin();
+                Number coeff = it->first;
+                if (coeff == 1)
+                    return true;
+            }
+            return false;
+        }
+      
     std::size_t size() const {
       return this->_map->size();
     }

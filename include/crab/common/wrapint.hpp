@@ -20,7 +20,7 @@ public:
   
 private:
   
-  uint64_t _n;        // 0 <= _n <= 2^_width - 1
+  int64_t _n;        // 0 <= _n <= 2^_width - 1
   bitwidth_t _width;  // 1 <= _width <= 64
   uint64_t _mod;      // 0 if _width=64 otherwise 2^_width
 
@@ -87,6 +87,19 @@ public:
   }
 
   bitwidth_t get_bitwidth() const { return _width;}
+    
+    static uint64_t get_mod(bitwidth_t bit) {
+        uint64_t mod;
+        assert (bit <= 64);
+        switch (bit){
+            case 8:  mod = mod_8;  break;
+            case 16: mod = mod_16; break;
+            case 32: mod = mod_32; break;
+            case 64: break;
+            default: mod = 1 << bit;
+        }
+        return mod;
+  }
 
   // return true iff most significant bit is 1.
   bool msb() const {
@@ -101,7 +114,7 @@ public:
 
   // return 1000....0
   static wrapint get_signed_min(bitwidth_t w) {
-    return wrapint(1 << (w-1), w);
+    return wrapint(-(1 << (w-1)), w);
   }
 
   // return 1111....1

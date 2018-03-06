@@ -34,4 +34,7 @@ Z_RUNNER(crab::domain_impl::z_ag_num_null_t)
 
 Q_RUNNER(crab::domain_impl::q_interval_domain_t)
 Q_RUNNER(crab::domain_impl::q_pk_apron_domain_t)
-Q_RUNNER(crab::domain_impl::q_boxes_domain_t)  
+Q_RUNNER(crab::domain_impl::q_boxes_domain_t)
+
+Z_RUNNER(crab::domain_impl::z_wrapped_numerical_domain_t)
+Z_RUNNER(crab::domain_impl::z_wrapped_int_dbm_t)
